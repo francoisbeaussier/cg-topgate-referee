@@ -1,0 +1,48 @@
+read playerCount:int myId:int laps:int gateCount:int
+loop gateCount read gateX:int gateY:int gateZ:int nx:float ny:float nz:float radius:int
+read cellCount:int
+loop cellCount read cellX:int cellY:int cellZ:int cellType:word(6)
+read pylonCount:int
+loop pylonCount read pylonX:int pylonY:int pylonRadius:int
+gameloop
+read remainingTime:int
+loop playerCount read x:float y:float z:float vx:float vy:float vz:float fx:float fy:float fz:float ux:float uy:float uz:float nextGate:int lap:int boosts:int boostTimer:int battery:int cutout:int state:int shield:int ghost:int item:int wx:float wy:float wz:float
+loop cellCount read respawnTimer:int
+write ANGLE 70 0 30 0
+
+STATEMENT
+Fly your drone through the gates, in order and in the right direction.
+
+INPUT
+playerCount: number of drones (2 to 4)
+myId: your drone id
+laps: laps to finish
+gateCount: number of gates, gate 0 is the start and finish line
+gateX: centre of the gate
+nx: direction to fly through the gate (unit vector)
+radius: radius of the ring
+cellCount: number of power cells
+cellType: CHARGE, SHIELD or GHOST
+pylonCount: number of pylons (vertical columns from floor to ceiling)
+pylonX: position of the pylon axis
+pylonRadius: radius of the pylon
+x: position of the drone
+vx: speed of the drone
+fx: forward unit vector of the drone
+ux: up unit vector of the drone
+nextGate: id of the next gate to clear
+lap: laps already completed
+boosts: boosts available
+boostTimer: turns until the next boost is recharged
+battery: turns left before the battery is empty
+cutout: turns left with the motors cut
+state: 0 destroyed, 1 flying, 2 finished
+shield: turns left with a shield
+ghost: turns left as a ghost
+item: held item, 0 none, 1 SHIELD, 2 GHOST
+wx: current rotation speed: the rotation made last turn (rotation vector, radians)
+respawnTimer: turns before the cell comes back, 0 if it is there
+remainingTime: milliseconds left in your time bank for the whole race
+
+OUTPUT
+[ANGLE|ACRO] THROTTLE YAW PITCH ROLL [BOOST] [USE] [CAM angle] [message]
